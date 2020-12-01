@@ -7,42 +7,46 @@ import { useSelector } from "react-redux";
 
 const GameDetail = () => {
   // Data
-  const { screen, game } = useSelector((state) => state.detail);
+  const { screen, game, isLoading } = useSelector((state) => state.detail);
 
   return (
-    <CardShadow className="card-shadow">
-      <Detail className="detail">
-        <Stats className="stats">
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
-          </div>
-          <Info className="info">
-            <h3>Platforms</h3>
-            <Platforms className="platforms">
-              {game.platforms.map((data) => (
-                <h3 key={data.platform.id}>{data.platform.name}</h3>
+    <>
+      {!isLoading && (
+        <CardShadow className="card-shadow">
+          <Detail className="detail">
+            <Stats className="stats">
+              <div className="rating">
+                <h3>{game.name}</h3>
+                <p>Rating: {game.rating}</p>
+              </div>
+              <Info className="info">
+                <h3>Platforms</h3>
+                <Platforms className="platforms">
+                  {game.platforms.map((data) => (
+                    <h3 key={data.platform.id}>{data.platform.name}</h3>
+                  ))}
+                </Platforms>
+              </Info>
+            </Stats>
+            <Media className="media">
+              <img src={game.background_image} alt={game.name} />
+            </Media>
+            <Description className="description">
+              <p>{game.description_raw}</p>
+            </Description>
+            <div className="gallery">
+              {screen.results.map((screen) => (
+                <img
+                  key={screen.id}
+                  src={screen.image}
+                  alt={"screenshot " + game.name}
+                />
               ))}
-            </Platforms>
-          </Info>
-        </Stats>
-        <Media className="media">
-          <img src={game.background_image} alt={game.name} />
-        </Media>
-        <Description className="description">
-          <p>{game.description_raw}</p>
-        </Description>
-        <div className="gallery">
-          {screen.results.map((screen) => (
-            <img
-              key={screen.id}
-              src={screen.image}
-              alt={"screenshot " + game.name}
-            />
-          ))}
-        </div>
-      </Detail>
-    </CardShadow>
+            </div>
+          </Detail>
+        </CardShadow>
+      )}
+    </>
   );
 };
 
