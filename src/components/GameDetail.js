@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 // Style and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { loadDetail, setPopupIsOpen } from "../actions/detailAction";
+
 // utils
 import { smallImage } from "../util";
 // Images
@@ -19,7 +21,11 @@ import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
 
 const GameDetail = ({ pathId }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  // Data
+  const { screen, game, isLoading } = useSelector((state) => state.detail);
   // Exit Detail
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -28,6 +34,12 @@ const GameDetail = ({ pathId }) => {
       history.goBack();
     }
   };
+
+  // Load detail
+  useEffect(() => {
+    dispatch(loadDetail(pathId));
+    dispatch(setPopupIsOpen(true));
+  }, [pathId, dispatch]);
 
   const exit = () => {
     document.body.style.overflow = "auto";
@@ -74,9 +86,6 @@ const GameDetail = ({ pathId }) => {
     return stars;
   };
 
-  // Data
-  const { screen, game, isLoading } = useSelector((state) => state.detail);
-
   return (
     <>
       {!isLoading && (
@@ -111,7 +120,7 @@ const GameDetail = ({ pathId }) => {
             <Description className="description">
               <p>{game.description_raw}</p>
             </Description>
-            <div className="gallery">
+            <Gallery className="gallery">
               {screen.results.map((screen) => (
                 <img
                   key={screen.id}
@@ -119,7 +128,7 @@ const GameDetail = ({ pathId }) => {
                   alt={"screenshot " + game.name}
                 />
               ))}
-            </div>
+            </Gallery>
           </Detail>
         </CardShadow>
       )}
@@ -248,6 +257,12 @@ const Media = styled(motion.div)`
 
 const Description = styled(motion.div)`
   margin: 5rem 0rem;
+`;
+
+const Gallery = styled.div`
+  img {
+    margin-bottom: 1rem;
+  }
 `;
 
 export default GameDetail;

@@ -3,10 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { popup } from "../animations";
-
-// Redux
-import { useDispatch } from "react-redux";
-import { loadDetail, setPopupIsOpen } from "../actions/detailAction";
 // Router
 import { Link } from "react-router-dom";
 // utils
@@ -14,13 +10,6 @@ import { smallImage } from "../util";
 
 const Game = ({ name, released, id, image, pathname }) => {
   const stringPathId = id.toString();
-  const dispatch = useDispatch();
-
-  // Load detail Handler
-  const loadDetailHandler = () => {
-    dispatch(setPopupIsOpen(true));
-    dispatch(loadDetail(id));
-  };
 
   return (
     <StyledGame
@@ -28,7 +17,6 @@ const Game = ({ name, released, id, image, pathname }) => {
       initial="hidden"
       animate="show"
       layoutId={stringPathId}
-      onClick={loadDetailHandler}
     >
       <Link to={`${pathname}/game/${id}`}>
         <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
