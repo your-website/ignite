@@ -29,6 +29,11 @@ const GameDetail = ({ pathId }) => {
     }
   };
 
+  const exit = () => {
+    document.body.style.overflow = "auto";
+    history.push("/");
+  };
+
   // Get Platform images
   const getPlatform = (platform) => {
     switch (platform) {
@@ -77,6 +82,7 @@ const GameDetail = ({ pathId }) => {
       {!isLoading && (
         <CardShadow onClick={exitDetailHandler} className="card-shadow">
           <Detail layoutId={pathId} className="detail">
+            <button onClick={exit}>Close</button>
             <Stats className="stats">
               <div className="rating">
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
@@ -151,8 +157,43 @@ const Detail = styled(motion.div)`
   left: 10%;
   color: #000;
 
+  button {
+    display: none;
+    padding: 0.6rem;
+    align-self: flex-start;
+    background: transparent;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    font-weight: bold;
+    color: #000;
+    margin-top: 1.5rem;
+
+    &:hover {
+      background: #ff7676;
+      color: #fff;
+    }
+  }
+
   img {
     width: 100%;
+  }
+
+  @media (max-width: 1280px) {
+    padding: 2rem 1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 0.6rem;
+
+    button {
+      display: block;
+    }
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
+    left: 5%;
   }
 `;
 
@@ -166,6 +207,15 @@ const Stats = styled(motion.div)`
     height: 2rem;
     display: inline;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h3 {
+      text-align: left;
+    }
+  }
 `;
 
 const Info = styled(motion.div)`
@@ -175,8 +225,17 @@ const Info = styled(motion.div)`
 const Platforms = styled(motion.div)`
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   img {
     margin-left: 3rem;
+  }
+
+  @media (max-width: 1024px) {
+    img {
+      margin-left: 0;
+      margin-top: 1rem;
+      margin-right: 1rem;
+    }
   }
 `;
 

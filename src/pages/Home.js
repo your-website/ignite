@@ -10,6 +10,8 @@ import Game from "../components/Game";
 // Style and animation
 import styled from "styled-components";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { fadeIn } from "../anamations";
+
 const Home = () => {
   // get current location
   const location = useLocation();
@@ -28,7 +30,7 @@ const Home = () => {
   );
 
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetails pathId={pathId} />}
@@ -98,6 +100,10 @@ const GameList = styled(motion.div)`
   h2 {
     padding: 5rem 0rem;
   }
+
+  @media (max-width: 768px) {
+    padding: 0rem 0.6rem;
+  }
 `;
 
 const Games = styled(motion.div)`
@@ -106,6 +112,11 @@ const Games = styled(motion.div)`
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   grid-column-gap: 3rem;
   grid-row-gap: 5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: minmax(200px, 500px);
+    justify-content: center;
+  }
 `;
 
 export default Home;

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import logo from "../img/logo.svg";
+import { fadeIn } from "../anamations";
+
 // Redux and Routes
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
@@ -26,7 +28,7 @@ const Nav = () => {
   };
 
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearched}>
         <img src={logo} alt="logo" />
         <h1>Ignite</h1>
@@ -61,6 +63,28 @@ const StyledNav = styled(motion.nav)`
     cursor: pointer;
     background: lightblue;
     color: #000;
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 2rem;
+
+    input {
+      width: 50%;
+      padding: 0.5rem 2rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    input {
+      width: 80%;
+      padding: 0.5rem 2rem;
+    }
   }
 `;
 

@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle`
         &::-webkit-scrollbar-track {
             background-color: #fff;
         }
+
+        @media (max-width: 768px) {
+            font-size: 85%;
+        }
     }
     body {
         font-family: 'Montserrat', sans-serif;
