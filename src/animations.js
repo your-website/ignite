@@ -31,3 +31,29 @@ export const popup = {
     transition: { duration: 0.75 },
   },
 };
+
+export const sliderContainer = {
+  hidden: { opacity: 1 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.25, ease: "easeOut" },
+  },
+};
+
+export const slideText = {
+  hidden: { opacity: 1, x: 300 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.75 },
+  },
+};
+
+export const animSlideFromLeft = {
+  hidden: { opacity: 1, x: -300 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};

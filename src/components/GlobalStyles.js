@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
             background-color: #fff;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 930px) {
             font-size: 85%;
         }
     }

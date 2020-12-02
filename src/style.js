@@ -16,6 +16,7 @@ export const Games = styled(motion.div)`
 
 export const GameList = styled(motion.div)`
   padding: 0rem 5rem;
+  min-height: 62vh;
 
   h2 {
     padding: 5rem 0rem;

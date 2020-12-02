@@ -10,7 +10,7 @@ import NewGamesPage from "./pages/NewGames";
 import PopularGamesPage from "./pages/PopularGames";
 import UpcomingGamesPage from "./pages/UpcomingGames";
 import SearchedGames from "./pages/SearchedGames";
-
+import Footer from "./components/Footer";
 import { AnimateSharedLayout } from "framer-motion";
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
           <UpcomingGamesPage />
         </Route>
       </AnimateSharedLayout>
+      <Footer />
     </div>
   );
 }

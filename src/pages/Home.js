@@ -1,39 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { fadeIn } from "../animations";
+import { fadeIn, sliderContainer, animSlideFromLeft } from "../animations";
+import { GameList } from "../style";
 
 const Home = () => {
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
-      <h1>Hello world</h1>
+      <motion.div variants={sliderContainer} initial="hidden" animate="show">
+        <Title variants={animSlideFromLeft}>Hello!</Title>
+        <Paragraph variants={fadeIn}>
+          This is an application for searching games by various parameters.
+        </Paragraph>
+        <Paragraph variants={fadeIn}>
+          Click on the category of interest in the navigation above and start
+          your journey.
+        </Paragraph>
+      </motion.div>
     </GameList>
   );
 };
 
-const GameList = styled(motion.div)`
-  padding: 0rem 5rem;
+const Paragraph = styled(motion.p)``;
 
-  h2 {
-    padding: 5rem 0rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0rem 0.6rem;
-  }
-`;
-
-const Games = styled(motion.div)`
-  min-height: 80vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  grid-column-gap: 3rem;
-  grid-row-gap: 5rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: minmax(200px, 500px);
-    justify-content: center;
-  }
-`;
+const Title = styled(motion.h2)``;
 
 export default Home;

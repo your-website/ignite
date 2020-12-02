@@ -1,27 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 // Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import logo from "../img/logo.svg";
-import { fadeIn } from "../animations";
+import { fadeIn, animSlideFromLeft } from "../animations";
 
 // Redux and Routes
-import { fetchSearch } from "../actions/gamesAction";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 const Nav = () => {
-  const dispatch = useDispatch();
-  const [textInput, setTextInput] = useState("");
-
-  const inputHandler = (e) => {
-    setTextInput(e.target.value);
-  };
-
-  const submitSearch = (e) => {
-    e.preventDefault();
-    dispatch(fetchSearch(textInput));
-    setTextInput("");
-  };
+  const { pathname } = useLocation();
 
   return (
     <StyledNav variants={fadeIn} initial="hidden" animate="show">
@@ -35,29 +23,34 @@ const Nav = () => {
         <Ul>
           <li>
             <Link to="/upcoming">Upcoming</Link>
-            <Line />
+            {pathname === "/upcoming" ? (
+              <Line variants={animSlideFromLeft} />
+            ) : (
+              ""
+            )}
           </li>
           <li>
             <Link to="/new">New games</Link>
-
-            <Line />
+            {pathname === "/new" ? <Line variants={animSlideFromLeft} /> : ""}
           </li>
           <li>
             <Link to="/popular">Popular</Link>
-            <Line />
+            {pathname === "/popular" ? (
+              <Line variants={animSlideFromLeft} />
+            ) : (
+              ""
+            )}
           </li>
           <li>
             <Link to="/searched">Searched</Link>
-            <Line />
+            {pathname === "/searched" ? (
+              <Line variants={animSlideFromLeft} />
+            ) : (
+              ""
+            )}
           </li>
         </Ul>
       </Container>
-      <form className="search">
-        <input value={textInput} onChange={inputHandler} type="text" />
-        <button onClick={submitSearch} type="submit">
-          Search
-        </button>
-      </form>
     </StyledNav>
   );
 };
@@ -66,50 +59,12 @@ const StyledNav = styled(motion.nav)`
   padding: 3rem 5rem;
   text-align: center;
 
-  input {
-    width: 30%;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    border: none;
-    margin-top: 1rem;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+  @media (max-width: 620px) {
+    padding: 3rem 0.6rem;
   }
 
-  button {
-    font-size: 1.5rem;
-    border: none;
-    padding: 0.5rem 2rem;
-    cursor: pointer;
-    background: lightblue;
-    color: #000;
-  }
-
-  form {
-    display: flex;
-    align-items: flex-end;
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 3rem 2rem;
-
-    input {
-      width: 50%;
-      padding: 0.5rem 2rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    input {
-      width: 80%;
-      padding: 0.5rem 2rem;
-    }
+  @media (max-width: 430px) {
+    padding-bottom: 0rem;
   }
 `;
 
@@ -139,6 +94,15 @@ const Ul = styled.ul`
       margin-left: 2rem;
     }
   }
+
+  @media (max-width: 430px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    li {
+      margin: 2rem;
+    }
+  }
 `;
 
 const Line = styled(motion.div)`
@@ -152,6 +116,12 @@ const Line = styled(motion.div)`
 const Container = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 10vh;
+  }
 `;
 
 export default Nav;
