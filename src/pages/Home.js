@@ -16,6 +16,9 @@ const Home = () => {
           Click on the category of interest in the navigation above and start
           your journey.
         </Paragraph>
+        <Paragraph variants={fadeIn}>
+          To learn more about the game - click on the image.
+        </Paragraph>
       </motion.div>
     </GameList>
   );
