@@ -6,20 +6,36 @@ import {
   searchGameURL,
 } from "../api";
 
-// Action Creator
-
 // Use thunk
-export const loadGames = () => async (dispatch) => {
+export const loadNewGames = () => async (dispatch) => {
   // Fetch Axios
-  const popularData = await axios.get(popularGamesUrl());
   const newGamesData = await axios.get(newGamesUrl());
+  dispatch({
+    type: "FETCH_NEW_GAMES",
+    payload: {
+      newGames: newGamesData.data.results,
+    },
+  });
+};
+
+export const loadUpcomingGames = () => async (dispatch) => {
+  // Fetch Axios
   const upcomingData = await axios.get(upcomingGamesUrl());
   dispatch({
-    type: "FETCH_GAMES",
+    type: "FETCH_UPCOMING_GAMES",
+    payload: {
+      upcoming: upcomingData.data.results,
+    },
+  });
+};
+
+export const loadPopularGames = () => async (dispatch) => {
+  // Fetch Axios
+  const popularData = await axios.get(popularGamesUrl());
+  dispatch({
+    type: "FETCH_POPULAR_GAMES",
     payload: {
       popular: popularData.data.results,
-      newGames: newGamesData.data.results,
-      upcoming: upcomingData.data.results,
     },
   });
 };

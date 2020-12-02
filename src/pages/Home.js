@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GameDetails from "../components/GameDetail";
 import { useLocation } from "react-router-dom";
-
 // Redux
-import { useDispatch, useSelector } from "react-redux";
-import { loadGames } from "../actions/gamesAction";
+import { useSelector } from "react-redux";
 // Components
 import Game from "../components/Game";
 // Style and animation
@@ -17,17 +15,8 @@ const Home = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
 
-  // Fetch games
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadGames());
-  }, [dispatch]);
-
   // Get that data from reducer
-  const { popular, newGames, upcoming, searched } = useSelector(
-    (state) => state.games
-  );
+  const { searched } = useSelector((state) => state.games);
 
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
@@ -53,42 +42,6 @@ const Home = () => {
         ) : (
           ""
         )}
-        <h2>Upcoming Games</h2>
-        <Games>
-          {upcoming.map((game) => (
-            <Game
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-              key={game.id}
-            />
-          ))}
-        </Games>
-        <h2>Popular Games</h2>
-        <Games>
-          {popular.map((game) => (
-            <Game
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-              key={game.id}
-            />
-          ))}
-        </Games>
-        <h2>New Games</h2>
-        <Games>
-          {newGames.map((game) => (
-            <Game
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-              key={game.id}
-            />
-          ))}
-        </Games>
       </AnimateSharedLayout>
     </GameList>
   );

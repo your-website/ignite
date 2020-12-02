@@ -8,7 +8,7 @@ import { fadeIn } from "../anamations";
 // Redux and Routes
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
-
+import { Link } from "react-router-dom";
 const Nav = () => {
   const dispatch = useDispatch();
   const [textInput, setTextInput] = useState("");
@@ -23,16 +23,31 @@ const Nav = () => {
     setTextInput("");
   };
 
-  const clearSearched = () => {
-    dispatch({ type: "CLEAR_SEARCHED" });
-  };
-
   return (
     <StyledNav variants={fadeIn} initial="hidden" animate="show">
-      <Logo onClick={clearSearched}>
-        <img src={logo} alt="logo" />
-        <h1>Ignite</h1>
-      </Logo>
+      <Container>
+        <Link to="/">
+          <Logo>
+            <img src={logo} alt="logo" />
+            <h1>Ignite</h1>
+          </Logo>
+        </Link>
+        <Ul>
+          <li>
+            <Link to="/upcoming">Upcoming</Link>
+            <Line />
+          </li>
+          <li>
+            <Link to="/new">New games</Link>
+
+            <Line />
+          </li>
+          <li>
+            <Link to="/popular">Popular</Link>
+            <Line />
+          </li>
+        </Ul>
+      </Container>
       <form className="search">
         <input value={textInput} onChange={inputHandler} type="text" />
         <button onClick={submitSearch} type="submit">
@@ -63,6 +78,12 @@ const StyledNav = styled(motion.nav)`
     cursor: pointer;
     background: lightblue;
     color: #000;
+  }
+
+  form {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 1rem;
   }
 
   @media (max-width: 768px) {
@@ -96,6 +117,37 @@ const Logo = styled(motion.div)`
     height: 2rem;
     width: 2rem;
   }
+`;
+
+const Ul = styled.ul`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  li {
+    position: relative;
+    list-style: none;
+    margin-left: 5rem;
+  }
+
+  @media (max-width: 768px) {
+    li {
+      margin-left: 2rem;
+    }
+  }
+`;
+
+const Line = styled(motion.div)`
+  height: 0.3rem;
+  background: lightblue;
+  width: 100%;
+  position: absolute;
+  bottom: -80%;
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export default Nav;
