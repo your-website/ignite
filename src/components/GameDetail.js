@@ -25,13 +25,13 @@ const GameDetail = ({ pathId }) => {
     const element = e.target;
     if (element.classList.contains("card-shadow")) {
       document.body.style.overflow = "auto";
-      history.push("/");
+      history.goBack();
     }
   };
 
   const exit = () => {
     document.body.style.overflow = "auto";
-    history.push("/");
+    history.goBack();
   };
 
   // Get Platform images

@@ -2,6 +2,7 @@ const initState = {
   game: { platforms: [] },
   screen: { results: [] },
   isLoading: true,
+  popupIsOpen: false,
 };
 
 const detailReducer = (state = initState, action) => {
@@ -17,6 +18,11 @@ const detailReducer = (state = initState, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+    case "POPUP_IS_OPEN":
+      return {
+        ...state,
+        popupIsOpen: action.payload.popupIsOpen,
       };
     default:
       return { ...state };

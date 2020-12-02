@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import logo from "../img/logo.svg";
-import { fadeIn } from "../anamations";
+import { fadeIn } from "../animations";
 
 // Redux and Routes
 import { fetchSearch } from "../actions/gamesAction";
@@ -44,6 +44,10 @@ const Nav = () => {
           </li>
           <li>
             <Link to="/popular">Popular</Link>
+            <Line />
+          </li>
+          <li>
+            <Link to="/searched">Searched</Link>
             <Line />
           </li>
         </Ul>

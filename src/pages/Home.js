@@ -1,48 +1,12 @@
 import React from "react";
-import GameDetails from "../components/GameDetail";
-import { useLocation } from "react-router-dom";
-// Redux
-import { useSelector } from "react-redux";
-// Components
-import Game from "../components/Game";
-// Style and animation
 import styled from "styled-components";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
-import { fadeIn } from "../anamations";
+import { motion } from "framer-motion";
+import { fadeIn } from "../animations";
 
 const Home = () => {
-  // get current location
-  const location = useLocation();
-  const pathId = location.pathname.split("/")[2];
-
-  // Get that data from reducer
-  const { searched } = useSelector((state) => state.games);
-
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
-      <AnimateSharedLayout type="crossfade">
-        <AnimatePresence>
-          {pathId && <GameDetails pathId={pathId} />}
-        </AnimatePresence>
-        {searched.length ? (
-          <div className="searched">
-            <h2>Searched Games</h2>
-            <Games>
-              {searched.map((game) => (
-                <Game
-                  name={game.name}
-                  released={game.released}
-                  id={game.id}
-                  image={game.background_image}
-                  key={game.id}
-                />
-              ))}
-            </Games>
-          </div>
-        ) : (
-          ""
-        )}
-      </AnimateSharedLayout>
+      <h1>Hello world</h1>
     </GameList>
   );
 };

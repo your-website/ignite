@@ -18,3 +18,12 @@ export const loadDetail = (id) => async (dispatch) => {
     },
   });
 };
+
+export const setPopupIsOpen = (payload) => (dispatch) => {
+  dispatch({
+    type: "POPUP_IS_OPEN",
+    payload: {
+      popupIsOpen: payload,
+    },
+  });
+};

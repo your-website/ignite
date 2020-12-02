@@ -9,24 +9,32 @@ import Nav from "./components/Nav";
 import NewGamesPage from "./pages/NewGames";
 import PopularGamesPage from "./pages/PopularGames";
 import UpcomingGamesPage from "./pages/UpcomingGames";
+import SearchedGames from "./pages/SearchedGames";
+
+import { AnimateSharedLayout } from "framer-motion";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyles />
       <Nav />
-      <Route path={["/game/:id", "/"]}>
-        <Home />
-      </Route>
-      <Route path={["/game/:id", "/new"]}>
-        <NewGamesPage />
-      </Route>
-      <Route path={["/game/:id", "/popular"]}>
-        <PopularGamesPage />
-      </Route>
-      <Route path={["/game/:id", "/upcoming"]}>
-        <UpcomingGamesPage />
-      </Route>
+      <AnimateSharedLayout type="crossfade">
+        <Route path={["/game/:id", "/"]} exact>
+          <Home />
+        </Route>
+        <Route path={["searched/game/:id", "/searched"]}>
+          <SearchedGames />
+        </Route>
+        <Route path={["/new/game/:id", "/new"]}>
+          <NewGamesPage />
+        </Route>
+        <Route path={["/popular/game/:id", "/popular"]}>
+          <PopularGamesPage />
+        </Route>
+        <Route path={["/upcoming/game/:id", "/upcoming"]}>
+          <UpcomingGamesPage />
+        </Route>
+      </AnimateSharedLayout>
     </div>
   );
 }
